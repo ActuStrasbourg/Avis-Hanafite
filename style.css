@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f5f0;
+  color: #3d2b1f;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100vh;
+  background-color: #a1866f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.navbar.open {
+  width: 200px;
+}
+
+.menu-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-icon span {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  display: block;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-left: 20px;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.navbar.open .menu-links {
+  opacity: 1;
+  height: auto;
+  margin-top: 40px;
+}
+
+.menu-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.menu-links a:hover {
+  color: #f0e5dc;
+}
+
+.main-content {
+  margin-left: 60px;
+  padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+.navbar.open ~ .main-content {
+  margin-left: 200px;
+}
+
+.intro {
+  background-color: #fefaf5;
+  border-left: 6px solid #a1866f;
+  padding: 25px 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+.intro h1 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #3d2b1f;
+}
+
+.intro p {
+  line-height: 1.7;
+  color: #4a392f;
+  margin-bottom: 15px;
+}

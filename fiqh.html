@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fatwas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #e8e8e2);
+      color: #1c1b1f;
+      min-height: 100vh;
+      padding: 3rem 2rem 5rem;
+      background-image:
+        radial-gradient(circle at top left, #bfa64a33 10%, transparent 50%),
+        radial-gradient(circle at bottom right, #bfa64a22 15%, transparent 60%);
+    }
+    /* Header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(255 255 255 / 0.95);
+      box-shadow: 0 2px 8px rgb(191 166 74 / 0.3);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #bfa64a;
+      letter-spacing: 0.12em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 3px solid #bfa64a;
+      z-index: 1000;
+      user-select: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 90px auto 0;
+      padding: 0 1rem;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgb(0 0 0 / 0.07);
+      padding-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #bfa64a;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 0.15em;
+      user-select: none;
+      text-shadow: 0 0 8px #bfa64a66;
+    }
+
+    .section-title {
+      color: #bfa64a;
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-left: 6px solid transparent;
+      padding-left: 12px;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .section-title:hover {
+      border-left-color: #bfa64a;
+      color: #997f22;
+      background: #f9f6e7;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px #bfa64a33;
+    }
+
+    .fatwa-list {
+      display: none;
+      margin-bottom: 2rem;
+      animation: fadeInSlideDown 0.4s ease forwards;
+    }
+
+    @keyframes fadeInSlideDown {
+      0% {opacity: 0; transform: translateY(-10px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    .fatwa-item {
+      background: #f2f0e8;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px #00000010;
+      transition: transform 0.2s ease;
+    }
+    .fatwa-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px #bfa64a55;
+    }
+
+    .fatwa-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #3a3a3a;
+      user-select: text;
+      font-size: 1.1rem;
+    }
+
+    .fatwa-content {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.4;
+      user-select: text;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 2rem 1rem 4rem;
+      }
+      header {
+        height: 50px;
+        font-size: 1.3rem;
+        letter-spacing: 0.1em;
+      }
+      main {
+        margin: 70px 0 0;
+        border-radius: 12px;
+        padding: 1rem 1rem 1.5rem;
+        box-shadow: 0 6px 15px rgb(0 0 0 / 0.05);
+      }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.1em;
+      }
+      .section-title {
+        font-size: 1.1rem;
+        margin: 1rem 0 0.7rem;
+        padding-left: 10px;
+        border-left-width: 4px;
+      }
+      .section-title:hover {
+        border-left-width: 4px;
+        border-radius: 4px;
+      }
+      .fatwa-item {
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        margin-bottom: 0.8rem;
+      }
+      .fatwa-title {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      .fatwa-content {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Fatwas Hanafites</header>
+
+  <main>
+    <h1>Fatwas Hanafites</h1>
+    <div id="subsectionList"></div>
+  </main>
+
+  <script>
+    const fatwasData = {
+      "Prière": [
+        { title: "Dire 'Amin' à voix haute", content: "Selon l’école Hanafite, il est sunna de le prononcer discrètement." },
+        { title: "Une femme peut-elle diriger la prière ?", content: "C'est permis mais makrouh selon l’école Hanafite." }
+      ],
+      "Jeûne": [
+        { title: "Utiliser un parfum", content: "Un parfum sans alcool ne rompt pas le jeûne." }
+      ]
+    };
+
+    const subsectionList = document.getElementById('subsectionList');
+
+    function createFatwaItem(fatwa) {
+      const title = document.createElement('div');
+      title.className = 'fatwa-title';
+      title.textContent = fatwa.title;
+
+      const content = document.createElement('div');
+      content.className = 'fatwa-content';
+      content.textContent = fatwa.content;
+
+      const item = document.createElement('div');
+      item.className = 'fatwa-item';
+      item.appendChild(title);
+      item.appendChild(content);
+
+      return item;
+    }
+
+    function toggleVisibility(element) {
+      if (element.style.display === 'block') {
+        element.style.display = 'none';
+      } else {
+        document.querySelectorAll('.fatwa-list').forEach(list => {
+          list.style.display = 'none';
+        });
+        element.style.display = 'block';
+      }
+    }
+
+    function renderFatwas() {
+      Object.entries(fatwasData).forEach(([section, fatwas]) => {
+        const sectionTitle = document.createElement('div');
+        sectionTitle.className = 'section-title';
+        sectionTitle.textContent = section;
+
+        const fatwaList = document.createElement('div');
+        fatwaList.className = 'fatwa-list';
+
+        fatwas.forEach(fatwa => {
+          fatwaList.appendChild(createFatwaItem(fatwa));
+        });
+
+        sectionTitle.addEventListener('click', () => toggleVisibility(fatwaList));
+
+        subsectionList.appendChild(sectionTitle);
+        subsectionList.appendChild(fatwaList);
+      });
+    }
+
+    renderFatwas();
+  </script>
+</body>
+</html>
