@@ -92,6 +92,21 @@
       0% {opacity: 0; transform: translateY(-10px);}
       100% {opacity: 1; transform: translateY(0);}
     }
+    @keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fatwa-content {
+  display: none;
+  animation: slideDown 0.3s ease-out;
+}
 
     .fatwa-item {
       background: #f2f0e8;
@@ -168,7 +183,7 @@
   </style>
 </head>
 <body>
-  <header>Fatwas Hanafites</header>
+  <header>Questions</header>
 
   <main>
     <h1>Fatwas Hanafites</h1>
@@ -177,33 +192,71 @@
 
   <script>
     const fatwasData = {
-      "Prière": [
-        { title: "Dire 'Amin' à voix haute", content: "Selon l’école Hanafite, il est sunna de le prononcer discrètement." },
-        { title: "Une femme peut-elle diriger la prière ?", content: "C'est permis mais makrouh selon l’école Hanafite." }
-      ],
-      "Jeûne": [
-        { title: "Utiliser un parfum", content: "Un parfum sans alcool ne rompt pas le jeûne." }
-      ]
-    };
+  "Prière": [
+    { title: "Dire 'Amin' à voix haute", content: "Selon l’école Hanafite, il est sunna de le prononcer discrètement." },
+    { title: "Une femme peut-elle diriger la prière ?", content: "C'est permis mais makrouh selon l’école Hanafite." },
+    {
+  title: "Peut-on accomplir une prière surérogatoire (nafila) en groupe ?",
+  content: `
+    <p>Les actes d’adoration surérogatoires sont, par nature, des pratiques <strong>individuelles et discrètes</strong>.</p>
+    
+    <p>Selon les savants, il est <strong>déconseillé (makruh)</strong> d’organiser une prière surérogatoire en groupe à la suite d’un appel public.</p>
+    
+    <p>En revanche, il est <strong>recommandé (mustahab)</strong> de l’accomplir seul.</p>
+
+    <h3>Cas spécifique dans l’école hanafite :</h3>
+    <p>Selon l’école hanafite, la seule prière surérogatoire dont la pratique en groupe est légitimée est la prière de <em>tarawih</em> durant le mois de Ramadan.</p>
+    <p><em>(Zaynuddin Muhammed b. Ebî Bekr b. Abdilkâdir er-Râzi, Tuhfetu’l-Mulûk)</em></p>
+
+    <h3>Conditions à respecter pour prier en groupe :</h3>
+    <ul>
+      <li>Ne pas en faire une habitude</li>
+      <li>Ne pas lancer d’appel public</li>
+    </ul>
+
+    <p>Si ces conditions sont respectées, alors il n’y a pas de blâme à prier une nafila en groupe.</p>
+    <p><em>(Muhammed Emin İbn Abidin, Raddu’l-Muhtâr ala’d-Durri’l-Muhtâr)</em></p>
+
+    <h3>Exemple prophétique :</h3>
+    <p>Le Prophète ﷺ lui-même a parfois accompli des prières surérogatoires en groupe.</p>
+    <p><em>(Boukhari, Salât, 19 – Hadith n°380 ; Salât, 46 – Hadith n°425)</em></p>
+  `
+}
+  ],
+  "Jeûne": [
+    { title: "Utiliser un parfum", content: "Un parfum sans alcool ne rompt pas le jeûne." }
+  ]
+};
 
     const subsectionList = document.getElementById('subsectionList');
 
     function createFatwaItem(fatwa) {
-      const title = document.createElement('div');
-      title.className = 'fatwa-title';
-      title.textContent = fatwa.title;
+  const title = document.createElement('div');
+  title.className = 'fatwa-title';
+  title.textContent = fatwa.title;
+  title.style.cursor = 'pointer';
 
-      const content = document.createElement('div');
-      content.className = 'fatwa-content';
-      content.textContent = fatwa.content;
+  const content = document.createElement('div');
+  content.className = 'fatwa-content';
+  content.innerHTML = fatwa.content;
+  content.style.display = 'none'; 
 
-      const item = document.createElement('div');
-      item.className = 'fatwa-item';
-      item.appendChild(title);
-      item.appendChild(content);
-
-      return item;
+  title.addEventListener('click', () => {
+    if (content.style.display === 'none') {
+      content.style.display = 'block';
+      content.style.animation = 'slideDown 0.3s ease-out';
+    } else {
+      content.style.display = 'none';
     }
+  });
+
+  const item = document.createElement('div');
+  item.className = 'fatwa-item';
+  item.appendChild(title);
+  item.appendChild(content);
+
+  return item;
+}
 
     function toggleVisibility(element) {
       if (element.style.display === 'block') {
